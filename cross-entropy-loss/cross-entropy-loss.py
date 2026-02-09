@@ -7,11 +7,9 @@ def cross_entropy_loss(y_true, y_pred):
     y_pred = np.array(y_pred)
     y_true = np.array(y_true)
 
-    probs = []
-    for row in y_pred:
-        probs.append(row[np.argmax(row)])
+    indices = np.argmax(y_pred, axis=1)
 
-    probs = np.array(probs)
+    probs = y_pred[np.arange(y_pred.shape[0]), indices]
     log_probs = np.log(probs)
 
     return np.mean(-log_probs)
